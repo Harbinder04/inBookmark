@@ -1,0 +1,53 @@
+{
+  "manifest_version": 3,
+  "name": "Bookmark Sync",
+  "version": "1.0.0",
+  "description": "Sync bookmarks across browsers with enhanced metadata",
+  
+  "permissions": [
+    "bookmarks",
+    "storage",
+    "identity",
+    "activeTab"
+  ],
+  
+  "host_permissions": [
+    "http://localhost:3001/*",
+    "https://bookmark.harbinder.tech/*"
+  ],
+  
+  "oauth2": {
+    "client_id": "your-google-client-id.googleusercontent.com",
+    "scopes": ["openid", "email", "profile"]
+  },
+  
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "action": {
+    "default_icon": {
+      "16": "assets/icon8-bookmark-16.png",
+      "24": "assets/icon8-bookmark-24.png",
+      "32": "assets/icon8-bookmark-32.png"
+    },
+    "default_popup": "../src/popup/popup.html",
+    "default_title": "Bookmark Sync"
+  },
+  
+  "options_page": "options.html",
+  
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
