@@ -27,15 +27,15 @@
   
   "action": {
     "default_icon": {
-      "16": "assets/icon8-bookmark-16.png",
-      "24": "assets/icon8-bookmark-24.png",
-      "32": "assets/icon8-bookmark-32.png"
+      "16": "/icon8-bookmark-16.png",
+      "24": "/icon8-bookmark-24.png",
+      "32": "/icon8-bookmark-32.png"
     },
-    "default_popup": "../src/popup/popup.html",
+    "default_popup": "./src/popup/popup.html",
     "default_title": "Bookmark Sync"
   },
   
-  "options_page": "options.html",
+  "options_page": "./src/options/options.html",
   
   "content_scripts": [
     {
