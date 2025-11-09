@@ -1,12 +1,15 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 import { resolve } from 'path'
 
 export default defineConfig({
-    plugins: [react()],
+    plugins: [react(),
+    tailwindcss(),
+    ],
     publicDir: "public",
     build: {
-        outDir: 'dist',
+        outDir: '/mnt/d/extension/dist',
         rollupOptions: {
             input: {
                 popup: resolve(__dirname, 'src/popup/popup.html'),
