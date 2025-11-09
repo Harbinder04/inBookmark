@@ -9,6 +9,9 @@ export default defineConfig({
     ],
     publicDir: "public",
     build: {
+        //©️Important:
+        // for temp testing purpose, change it back to relative path later
+        emptyOutDir: true,
         outDir: '/mnt/d/extension/dist',
         rollupOptions: {
             input: {
