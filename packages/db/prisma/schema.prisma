@@ -9,17 +9,52 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+  id        String   @id @default(cuid())
+  googleId  String   @unique @map("google_id")
+  email     String   @unique
+  name      String?
+  avatarUrl String?  @map("avatar_url")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  bookmarks    Bookmark[]
+  syncSessions SyncSession[]
+
+  @@map("users")
 }
 
-model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  authorId  Int
-  author    User    @relation(fields: [authorId], references: [id])
+model Bookmark {
+  id          String   @id @default(cuid())
+  userId      String   @map("user_id")
+  title       String
+  url         String
+  folderPath  String?  @map("folder_path")
+  // faviconUrl  String?  @map("favicon_url")
+  description String?
+  tags        String[]
+  context     String?
+  isDeleted   Boolean  @default(false) @map("is_deleted")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  syncedAt    DateTime @default(now()) @map("synced_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, url])
+  @@map("bookmarks")
+}
+
+model SyncSession {
+  id               String    @id @default(cuid())
+  userId           String    @map("user_id")
+  browserId        String    @map("browser_id")
+  sessionStart     DateTime  @default(now()) @map("session_start")
+  sessionEnd       DateTime? @map("session_end")
+  bookmarksAdded   Int       @default(0) @map("bookmarks_added")
+  bookmarksUpdated Int       @default(0) @map("bookmarks_updated")
+  bookmarksDeleted Int       @default(0) @map("bookmarks_deleted")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sync_sessions")
 }
