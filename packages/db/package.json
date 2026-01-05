@@ -1,7 +1,7 @@
 {
   "name": "@repo/db",
   "version": "0.0.0",
-    "scripts": {
+  "scripts": {
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev --skip-generate",
     "db:deploy": "prisma migrate deploy"
@@ -13,6 +13,7 @@
     "prisma": "^6.16.1"
   },
   "dependencies": {
-    "@prisma/client": "^6.16.1"
+    "@prisma/client": "^6.16.1",
+    "dotenv": "^17.2.3"
   }
 }
